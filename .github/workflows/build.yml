@@ -1,0 +1,34 @@
+name: publish-docker-image
+
+on:
+  push:
+    branches:
+      - 'main'
+jobs:
+  build-and-push:
+    strategy:
+      matrix:
+        node_version: [16-alpine, 18-alpine]
+        pnpm_version: [6.32, 7.5.1]
+    name: publish-to-dockerhub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+      - uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - run: echo NODE_TAG_VERSION=${{ matrix.node_version }}
+      - run: echo PNPM_VERSION=${{ matrix.pnpm_version }}
+      - run: echo "IMAGE_TAG=${{ matrix.node_version }}-${{ matrix.pnpm_version }}" >> $GITHUB_ENV
+      - run: echo $IMAGE_TAG
+      - uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: stefanwin/node-alpine-pnpm:${{ env.IMAGE_TAG }}
+          build-args: |
+            NODE_TAG_VERSION=${{ matrix.node_version }}
+            PNPM_VERSION=${{ matrix.pnpm_version }}
