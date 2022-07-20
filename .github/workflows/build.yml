@@ -2,8 +2,10 @@ name: publish-docker-image
 
 on:
   push:
+    paths:
+      - *.md
     branches:
-      - 'main'
+      - main
 jobs:
   build-and-push:
     strategy:
