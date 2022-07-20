@@ -10,6 +10,8 @@ Based on the [`node-alpine` image.](https://hub.docker.com/_/node).
 
 ## Available Tags:
 
+Format: `${node_image}-${pnpm_version}`
+
 - `18-alpine-6.32`
 - `18-alpine-7.5.1`
 - `16-alpine-6.32`
