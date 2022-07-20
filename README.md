@@ -10,8 +10,8 @@ Based on the [`node-alpine` image.](https://hub.docker.com/_/node).
 
 ## Available Tags:
 
-- Node: 16, PNPM 6.32
-- Node: 16, PNPM 7.5.1
-- Node: 18, PNPM 6.32
-- Node: 18, PNPM 7.5.1
+- `18-alpine-6.32`
+- `18-alpine-7.5.1`
+- `16-alpine-6.32`
+- `16-alpine-7.5.1`
 
