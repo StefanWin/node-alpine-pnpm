@@ -3,9 +3,9 @@ name: publish-docker-image
 on:
   push:
     paths-ignore:
-      - *.md
+      - "*.md"
     branches:
-      - main
+      - "main"
 jobs:
   build-and-push:
     strategy:
